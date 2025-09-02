@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🩺 Doc-AI Frontend
 
-## Getting Started
+This is the **frontend** of **Doc-AI**, a web application that provides users with **daily medicine recommendations** and **AI-powered consultations**.  
+The app is built with **Next.js**, styled with **Tailwind CSS**, and deployed on **Vercel**.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚧 Project Status
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![Under Construction](https://media.tenor.com/MRCIli40TYoAAAAj/under-construction90s-90s.gif)  
+_This project is currently under construction. New features and improvements are being added regularly._
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ✨ Features (Planned & In Progress)
 
-## Learn More
+- 🔐 **Authentication (Login/Signup)** – Users can create accounts and log in securely.  
+- 👤 **Profile Page** – Collects personal details like name, age, medical history, and medications.  
+- 💬 **Chat Interface** – Users can interact with an AI bot for health queries.  
+- 💊 **Medicine Recommendations** – Provides relevant medicine information with **disclaimer warnings**.  
+- ⚠️ **Doctor Consultation Warning** – Every recommendation comes with a clear reminder to consult a professional doctor.  
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Frontend Framework**: [Next.js](https://nextjs.org/)  
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)  
+- **Deployment**: [Vercel](https://vercel.com/)  
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🚀 Getting Started
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Prerequisites
+- Node.js `>=18.x`
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/doc-ai-fe.git
+   cd doc-ai-fe
+   npm install
+   npm run dev
+   http://localhost:3000
+
+
+## 🤝 Contributing
+
+Contributions are welcome!
+Please fork this repo, create a branch, and submit a pull request.
+
+## ⚠️ Disclaimer
+
+This app is not a substitute for professional medical advice.
+Always consult a licensed healthcare provider before making medical decisions.
+
+## 📌 License
+
+All rights reserved -> Muhammad Hurrairah
+
+
+
+
+
+
