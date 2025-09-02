@@ -46,13 +46,6 @@ _This project is currently under construction. New features and improvements are
    npm run dev
    http://localhost:3000
 
-📂 Project Structure
-doc-ai-fe/
-│── app/                 # Next.js App Router pages
-│── components/          # Reusable UI components
-│── public/              # Static assets (images, icons, etc.)
-│── styles/              # Global styles
-│── package.json         # Project config
 
 ## 🤝 Contributing
 
