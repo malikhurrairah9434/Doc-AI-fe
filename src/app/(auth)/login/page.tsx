@@ -54,7 +54,7 @@ export default function LoginPage() {
           <img
             src="/logo.png"
             alt="Doc AI Logo"
-            className="h-16 w-auto mx-auto drop-shadow-lg hover:scale-105 transition-transform duration-300"
+            className="h-28 w-auto mx-auto drop-shadow-lg hover:scale-105 transition-transform duration-300"
           />
         </div>
 
