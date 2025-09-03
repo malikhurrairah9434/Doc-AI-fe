@@ -1,3 +1,8 @@
+
+<p align="center">
+  <img src="./public/logo.png" alt="Logo" width="400"/>
+</p>
+
 # 🩺 Doc-AI Frontend
 
 This is the **frontend** of **Doc-AI**, a web application that provides users with **daily medicine recommendations** and **AI-powered consultations**.  
