@@ -3,7 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
-import { User, LogOut, Menu, X } from "lucide-react"
+import { User, LogOut, Menu, X } from "./Icons"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -19,6 +19,7 @@ export default function Navbar() {
               alt="Doc AI Logo"
               width={120}
               height={120}
+              priority
               className="drop-shadow-lg hover:scale-110 transition-all duration-300 rounded-2xl border-2 border-white/50 shadow-lg"
             />
             <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white animate-pulse" />

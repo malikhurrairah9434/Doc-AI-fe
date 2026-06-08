@@ -1,4 +1,5 @@
 "use client"
+import Image from "next/image"
 import { useState, useEffect } from "react"
 
 export default function SignupPage() {
@@ -16,18 +17,18 @@ export default function SignupPage() {
     chronicConditions: ""
   })
   const [isLoaded, setIsLoaded] = useState(false)
-  const [focusedInput, setFocusedInput] = useState(null)
+  const [focusedInput, setFocusedInput] = useState<string | null>(null)
   const [currentStep, setCurrentStep] = useState(1)
 
   useEffect(() => {
     setIsLoaded(true)
   }, [])
 
-  const handleChange = (e: { target: { name: any; value: any } }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     console.log("Signup data:", form) // later send to backend
   }
@@ -46,7 +47,7 @@ export default function SignupPage() {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-sm scale-105"
         style={{
-          backgroundImage: 'url(/bg.jpg)',
+          backgroundImage: 'url(/Bg.jpg)',
         }}
       ></div>
       
@@ -75,9 +76,12 @@ export default function SignupPage() {
       <div className="relative z-10 w-full max-w-2xl px-6">
         {/* Logo */}
         <div className={`text-center mb-6 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}>
-          <img 
+          <Image
             src="/logo.png" 
             alt="Doc AI Logo" 
+            width={112}
+            height={112}
+            priority
             className="h-28 w-auto mx-auto drop-shadow-lg hover:scale-105 transition-transform duration-300"
           />
         </div>
@@ -122,6 +126,7 @@ export default function SignupPage() {
                     placeholder="Full Name"
                     value={form.name}
                     onChange={handleChange}
+                    onFocus={() => setFocusedInput("name")}
                     onBlur={() => setFocusedInput(null)}
                     className="w-full pl-12 pr-4 py-4 bg-slate-50/80 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 placeholder-slate-400 text-slate-700 hover:bg-white/90"
                     required
@@ -141,6 +146,7 @@ export default function SignupPage() {
                     placeholder="Email address"
                     value={form.email}
                     onChange={handleChange}
+                    onFocus={() => setFocusedInput("email")}
                     onBlur={() => setFocusedInput(null)}
                     className="w-full pl-12 pr-4 py-4 bg-slate-50/80 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 placeholder-slate-400 text-slate-700 hover:bg-white/90"
                     required
@@ -161,6 +167,7 @@ export default function SignupPage() {
                       placeholder="Age"
                       value={form.age}
                       onChange={handleChange}
+                      onFocus={() => setFocusedInput("age")}
                       onBlur={() => setFocusedInput(null)}
                       className="w-full pl-12 pr-4 py-4 bg-slate-50/80 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 placeholder-slate-400 text-slate-700 hover:bg-white/90"
                       required
@@ -203,6 +210,7 @@ export default function SignupPage() {
                     placeholder="Password"
                     value={form.password}
                     onChange={handleChange}
+                    onFocus={() => setFocusedInput("password")}
                     onBlur={() => setFocusedInput(null)}
                     className="w-full pl-12 pr-4 py-4 bg-slate-50/80 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 placeholder-slate-400 text-slate-700 hover:bg-white/90"
                     required
@@ -222,6 +230,7 @@ export default function SignupPage() {
                     placeholder="Confirm Password"
                     value={form.confirmPassword}
                     onChange={handleChange}
+                    onFocus={() => setFocusedInput("confirmPassword")}
                     onBlur={() => setFocusedInput(null)}
                     className="w-full pl-12 pr-4 py-4 bg-slate-50/80 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 placeholder-slate-400 text-slate-700 hover:bg-white/90"
                     required
@@ -259,6 +268,7 @@ export default function SignupPage() {
                     placeholder="Current Medications (e.g., Aspirin 100mg daily, Metformin 500mg twice daily)"
                     value={form.currentMedications}
                     onChange={handleChange}
+                    onFocus={() => setFocusedInput("currentMedications")}
                     onBlur={() => setFocusedInput(null)}
                     rows={3}
                     className="w-full pl-12 pr-4 py-4 bg-slate-50/80 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 placeholder-slate-400 text-slate-700 hover:bg-white/90 resize-none"
@@ -277,6 +287,7 @@ export default function SignupPage() {
                     placeholder="Known Allergies (e.g., Penicillin, Peanuts, Latex)"
                     value={form.allergies}
                     onChange={handleChange}
+                    onFocus={() => setFocusedInput("allergies")}
                     onBlur={() => setFocusedInput(null)}
                     rows={3}
                     className="w-full pl-12 pr-4 py-4 bg-slate-50/80 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 placeholder-slate-400 text-slate-700 hover:bg-white/90 resize-none"
@@ -295,6 +306,7 @@ export default function SignupPage() {
                     placeholder="Current Health Conditions (e.g., Diabetes Type 2, Hypertension)"
                     value={form.currentDiseases}
                     onChange={handleChange}
+                    onFocus={() => setFocusedInput("currentDiseases")}
                     onBlur={() => setFocusedInput(null)}
                     rows={3}
                     className="w-full pl-12 pr-4 py-4 bg-slate-50/80 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 placeholder-slate-400 text-slate-700 hover:bg-white/90 resize-none"
@@ -313,6 +325,7 @@ export default function SignupPage() {
                     placeholder="Past Medical History (e.g., Appendectomy 2019, Pneumonia 2020)"
                     value={form.pastDiseases}
                     onChange={handleChange}
+                    onFocus={() => setFocusedInput("pastDiseases")}
                     onBlur={() => setFocusedInput(null)}
                     rows={3}
                     className="w-full pl-12 pr-4 py-4 bg-slate-50/80 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 placeholder-slate-400 text-slate-700 hover:bg-white/90 resize-none"
@@ -331,6 +344,7 @@ export default function SignupPage() {
                     placeholder="Chronic Conditions (e.g., Asthma, Arthritis, Heart Disease)"
                     value={form.chronicConditions}
                     onChange={handleChange}
+                    onFocus={() => setFocusedInput("chronicConditions")}
                     onBlur={() => setFocusedInput(null)}
                     rows={3}
                     className="w-full pl-12 pr-4 py-4 bg-slate-50/80 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 placeholder-slate-400 text-slate-700 hover:bg-white/90 resize-none"

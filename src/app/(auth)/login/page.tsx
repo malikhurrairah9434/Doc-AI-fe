@@ -1,21 +1,22 @@
 "use client"
+import Image from "next/image"
 import { useState, useEffect } from "react"
 
 export default function LoginPage() {
   const [form, setForm] = useState({ email: "", password: "" })
   const [isLoaded, setIsLoaded] = useState(false)
-  const [focusedInput, setFocusedInput] = useState(null)
+  const [focusedInput, setFocusedInput] = useState<string | null>(null)
   const [showWarning, setShowWarning] = useState(true)
 
   useEffect(() => {
     setIsLoaded(true)
   }, [])
 
-  const handleChange = (e: { target: { name: any; value: any } }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     console.log("Login data:", form) // later send to backend
   }
@@ -26,7 +27,7 @@ export default function LoginPage() {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-sm scale-105"
         style={{
-          backgroundImage: 'url(/bg.jpg)',
+          backgroundImage: 'url(/Bg.jpg)',
         }}
       ></div>
 
@@ -51,9 +52,12 @@ export default function LoginPage() {
       <div className="relative z-10 w-full max-w-md px-6">
         {/* Logo */}
         <div className={`text-center mb-8 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}>
-          <img
+          <Image
             src="/logo.png"
             alt="Doc AI Logo"
+            width={112}
+            height={112}
+            priority
             className="h-28 w-auto mx-auto drop-shadow-lg hover:scale-105 transition-transform duration-300"
           />
         </div>
@@ -79,6 +83,7 @@ export default function LoginPage() {
                   placeholder="Email address"
                   value={form.email}
                   onChange={handleChange}
+                  onFocus={() => setFocusedInput("email")}
                   onBlur={() => setFocusedInput(null)}
                   className="w-full pl-12 pr-4 py-4 bg-slate-50/80 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 placeholder-slate-400 text-slate-700 hover:bg-white/90"
                   required
@@ -98,6 +103,7 @@ export default function LoginPage() {
                   placeholder="Password"
                   value={form.password}
                   onChange={handleChange}
+                  onFocus={() => setFocusedInput("password")}
                   onBlur={() => setFocusedInput(null)}
                   className="w-full pl-12 pr-4 py-4 bg-slate-50/80 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 placeholder-slate-400 text-slate-700 hover:bg-white/90"
                   required
@@ -129,7 +135,7 @@ export default function LoginPage() {
             {/* Sign Up Link */}
             <div className="mt-8 text-center">
               <p className="text-slate-600">
-                Don't have an account?{" "}
+                Don&apos;t have an account?{" "}
                 <a 
                   href="/signup" 
                   className="text-blue-600 hover:text-blue-700 font-semibold transition-colors duration-300 hover:underline"
@@ -181,7 +187,7 @@ export default function LoginPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/70 backdrop-blur-md">
           <div className="bg-white/95 border border-red-400 shadow-2xl rounded-2xl max-w-lg w-full mx-6 p-8 animate-in fade-in zoom-in duration-500">
             <h2 className="text-2xl font-bold text-red-700 mb-4 text-center">
-              ⚠️ Important Warning
+              Important Warning
             </h2>
             <p className="text-slate-700 text-center leading-relaxed mb-6">
               This application uses AI and should <strong>never replace professional medical advice</strong>.  

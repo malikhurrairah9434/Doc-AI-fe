@@ -17,7 +17,7 @@ export default function ProfilePage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     console.log("Profile Data:", form) // later send to backend
-    alert("Profile saved successfully ✅")
+    alert("Profile saved successfully")
   }
 
   return (

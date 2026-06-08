@@ -1,12 +1,11 @@
 'use client'
 
+import Image from "next/image";
 import { useState, useEffect } from "react";
-import LoginPage from "./(auth)/login/page";
-import SignupPage from "./(auth)/signup/page";
 
 export default function HomePage() {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [hoveredButton, setHoveredButton] = useState(null);
+  const [hoveredButton, setHoveredButton] = useState<string | null>(null);
 
   useEffect(() => {
     setIsLoaded(true);
@@ -18,7 +17,7 @@ export default function HomePage() {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-sm scale-100"
         style={{
-          backgroundImage: 'url(/bg.jpg)',
+          backgroundImage: 'url(/Bg.jpg)',
         }}
       ></div>
       {/* Animated background elements */}
@@ -50,9 +49,12 @@ export default function HomePage() {
       <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6">
         {/* Logo */}
         <div className={`mb-8 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}>
-          <img 
+          <Image
             src="/logo.png" 
             alt="Doc AI Logo" 
+            width={128}
+            height={128}
+            priority
             className="h-32 w-auto drop-shadow-lg hover:scale-105 transition-transform duration-300"
           />
         </div>
@@ -95,6 +97,7 @@ export default function HomePage() {
           <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center transition-all duration-1000 delay-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <a
               href="/login"
+              onMouseEnter={() => setHoveredButton('login')}
               onMouseLeave={() => setHoveredButton(null)}
               className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl font-semibold shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 min-w-[140px] overflow-hidden"
             >
@@ -109,6 +112,7 @@ export default function HomePage() {
             
             <a
               href="/signup"
+              onMouseEnter={() => setHoveredButton('signup')}
               onMouseLeave={() => setHoveredButton(null)}
               className="group relative px-8 py-4 bg-white text-slate-700 rounded-2xl font-semibold shadow-xl hover:shadow-2xl border border-slate-200 hover:border-blue-300 transform hover:-translate-y-1 transition-all duration-300 min-w-[140px] overflow-hidden backdrop-blur-sm"
             >
