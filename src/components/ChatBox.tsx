@@ -161,64 +161,84 @@ export default function ModernDocAIChatBox() {
     setMessages(newMessages)
   }
 
-  const handleSend = () => {
-    if (!input.trim() || isTyping) return
+  const handleSend = async () => {
+  if (!input.trim() || isTyping) return
 
-    const currentInput = input
-    const userMessage: Message = {
-      sender: "user",
-      text: currentInput,
-      timestamp: new Date(),
-    }
-
-    setMessages((prev) => [...prev, userMessage])
-    setInput("")
-    setIsTyping(true)
-
-    setTimeout(() => {
-      setMessages((prev) => [
-        ...prev,
-        { sender: "bot", text: "", timestamp: new Date(), typing: true },
-      ])
-    }, 800)
-
-    setTimeout(() => {
-      const { text, medicine } = generateResponse(currentInput)
-
-      setMessages((prev) => {
-        const newMessages = prev.filter((msg) => !msg.typing)
-
-        return [
-          ...newMessages,
-          {
-            sender: "bot",
-            text,
-            timestamp: new Date(),
-            medicineImage: medicine?.image,
-            medicineName: medicine?.name,
-          },
-        ]
-      })
-      setIsTyping(false)
-    }, 2500)
-
-    if (activeChat) {
-      setChats((prev) =>
-        prev.map((chat) =>
-          chat.id === activeChat && chat.title === "New Health Consultation"
-            ? {
-                ...chat,
-                title:
-                  currentInput.length > 30
-                    ? `${currentInput.slice(0, 30)}...`
-                    : currentInput,
-                lastActive: new Date(),
-              }
-            : chat
-        )
-      )
-    }
+  const currentInput = input
+  const userMessage: Message = {
+    sender: "user",
+    text: currentInput,
+    timestamp: new Date(),
   }
+
+  setMessages((prev) => [...prev, userMessage])
+  setInput("")
+  setIsTyping(true)
+
+  setTimeout(() => {
+    setMessages((prev) => [
+      ...prev,
+      { sender: "bot", text: "", timestamp: new Date(), typing: true },
+    ])
+  }, 500)
+
+  try {
+    const res = await fetch("/api/groq", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message: currentInput }),
+    })
+
+    const data = await res.json()
+
+    const medicine = findMedicine(currentInput)
+
+    setMessages((prev) => {
+      const newMessages = prev.filter((msg) => !msg.typing)
+
+      return [
+        ...newMessages,
+        {
+          sender: "bot",
+          text: data.reply,
+          timestamp: new Date(),
+          medicineImage: medicine?.image,
+          medicineName: medicine?.name,
+        },
+      ]
+    })
+  } catch (err) {
+    setMessages((prev) => [
+      ...prev.filter((m) => !m.typing),
+      {
+        sender: "bot",
+        text: "Error connecting to AI. Please try again.",
+        timestamp: new Date(),
+      },
+    ])
+  }
+
+  setIsTyping(false)
+
+  if (activeChat) {
+    setChats((prev) =>
+      prev.map((chat) =>
+        chat.id === activeChat && chat.title === "New Health Consultation"
+          ? {
+              ...chat,
+              title:
+                currentInput.length > 30
+                  ? `${currentInput.slice(0, 30)}...`
+                  : currentInput,
+              lastActive: new Date(),
+            }
+          : chat
+      )
+    )
+  }
+}
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
